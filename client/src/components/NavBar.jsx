@@ -2,8 +2,10 @@ import { Link, NavLink } from 'react-router-dom';
 import { Moon, Sun, Menu, X, Phone } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
-export default function Navbar({ isDark, setIsDark }) {
+export default function Navbar() {
+  const { isDark, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -71,7 +73,7 @@ export default function Navbar({ isDark, setIsDark }) {
           </a>
 
           <button
-            onClick={() => setIsDark(!isDark)}
+            onClick={toggleTheme}
             className="rounded-xl bg-brick-card p-2.5 text-brick-gold transition hover:bg-brick-card/80"
           >
             {isDark? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}

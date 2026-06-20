@@ -1,3 +1,5 @@
+import { airport1, airport2, cantonments1, cantonments2, dzorwulu1, eastLegon1, eastLegon2, labone1, osu1, romanRidge1, spintex1, trasacco1 } from "../assets/assets.js";
+
 export const properties = [
   {
     id: 1,
@@ -5,7 +7,7 @@ export const properties = [
     price: 2500000,
     location: "East Legon",
     beds: 4, baths: 5, size: 320,
-    images: ["/property1-1.jpg", "/property1-2.jpg"],
+    images: [eastLegon1],
     type: "Sale", status: "Sale", verified: true, installment: true, category: "House"
   },
   {
@@ -14,7 +16,7 @@ export const properties = [
     price: 18000,
     location: "Airport Residential",
     beds: 2, baths: 3, size: 140,
-    images: ["/property2-1.jpg"],
+    images: [osu1],
     type: "Rent", status: "Rent", verified: true, installment: false, category: "Apartment"
   },
   {
@@ -23,7 +25,7 @@ export const properties = [
     price: 3200000,
     location: "Cantonments",
     beds: 5, baths: 6, size: 450,
-    images: ["/property3-1.jpg"],
+    images: [cantonments1],
     type: "Sale", status: "New Build", verified: true, installment: true, category: "House"
   },
   {
@@ -32,7 +34,7 @@ export const properties = [
     price: 15000,
     location: "Labone",
     beds: 3, baths: 3, size: 200,
-    images: ["/property4-1.jpg"],
+    images: [eastLegon2],
     type: "Rent", status: "Rent", verified: true, installment: false, category: "House"
   },
   {
@@ -41,7 +43,7 @@ export const properties = [
     price: 12000,
     location: "Dzorwulu",
     beds: 1, baths: 2, size: 85,
-    images: ["/property5-1.jpg"],
+    images: [cantonments2],
     type: "Rent", status: "Rent", verified: false, installment: false, category: "Apartment"
   },
   {
@@ -50,7 +52,7 @@ export const properties = [
     price: 850000,
     location: "Spintex",
     beds: 0, baths: 0, size: 400,
-    images: ["/property6-1.jpg"],
+    images: [dzorwulu1],
     type: "Sale", status: "Sale", verified: true, installment: true, category: "Land"
   },
   {
@@ -59,7 +61,7 @@ export const properties = [
     price: 2800000,
     location: "Trasacco Valley",
     beds: 3, baths: 4, size: 280,
-    images: ["/property7-1.jpg"],
+    images: [romanRidge1],
     type: "Sale", status: "Sale", verified: true, installment: true, category: "House"
   },
   {
@@ -68,7 +70,7 @@ export const properties = [
     price: 25000,
     location: "Roman Ridge",
     beds: 0, baths: 2, size: 180,
-    images: ["/property8-1.jpg"],
+    images: [spintex1],
     type: "Rent", status: "Rent", verified: true, installment: false, category: "Commercial"
   },
   {
@@ -77,7 +79,7 @@ export const properties = [
     price: 1950000,
     location: "East Legon",
     beds: 3, baths: 4, size: 260,
-    images: ["/property9-1.jpg"],
+    images: [trasacco1],
     type: "Sale", status: "New Build", verified: true, installment: true, category: "House"
   },
   {
@@ -86,7 +88,7 @@ export const properties = [
     price: 22000,
     location: "Osu",
     beds: 4, baths: 4, size: 300,
-    images: ["/property10-1.jpg"],
+    images: [labone1],
     type: "Rent", status: "Rent", verified: false, installment: false, category: "House"
   },
   {
@@ -95,7 +97,7 @@ export const properties = [
     price: 3500000,
     location: "Cantonments",
     beds: 2, baths: 3, size: 190,
-    images: ["/property11-1.jpg"],
+    images: [airport1],
     type: "Sale", status: "Sale", verified: true, installment: false, category: "Apartment"
   },
   {
@@ -104,7 +106,7 @@ export const properties = [
     price: 1200000,
     location: "Airport Residential",
     beds: 0, baths: 0, size: 600,
-    images: ["/property12-1.jpg"],
+    images: [airport2],
     type: "Sale", status: "Sale", verified: true, installment: true, category: "Commercial"
   }
 ];

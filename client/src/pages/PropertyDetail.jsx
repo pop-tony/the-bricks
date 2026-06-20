@@ -8,8 +8,8 @@ import AgentCard from '../components/AgentCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const agents = [
-  { id: 1, name: 'Kwame Asante', photo: '/agent1.jpg', phone: '233241234567', listings: 24, sold: 156 },
-  { id: 2, name: 'Ama Osei', photo: '/agent2.jpg', phone: '233241234568', listings: 18, sold: 98 },
+  { id: 1, name: 'Kwame Asante', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974', phone: '233241234567', listings: 24, sold: 156 },
+  { id: 2, name: 'Ama Osei', photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974', phone: '233241234568', listings: 18, sold: 98 },
 ];
 
 export default function PropertyDetail() {

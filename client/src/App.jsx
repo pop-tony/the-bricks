@@ -14,8 +14,19 @@ import CareersPage from './pages/CareersPage';
 import BlogPage from './pages/BlogPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
+import { useEffect, useState } from 'react';
 
 export default function App() {
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
+
   return (
       <div className="flex min-h-screen flex-col bg-brick-navy">
         <Navbar />

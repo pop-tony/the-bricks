@@ -1,25 +1,33 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark,.dark *));
 
-*{
+* {
   font-family: "Manrope", sans-serif;
   font-weight: 500;
 }
 
-@variant dark (&:where(.dark,.dark *));
-
 @theme {
+  /* Light mode colors */
+  --color-brick-navy: #FFFFFF;
+  --color-brick-gold: #B8941F;
+  --color-brick-card: #F1F5F9;
+  --color-brick-text: #0F172A;
+  --color-brick-border: #E2E8F0;
+}
+
+/* Dark mode overrides */
+.dark {
   --color-brick-navy: #0A1929;
   --color-brick-gold: #D4AF37;
   --color-brick-card: #1E293B;
+  --color-brick-text: #FFFFFF;
+  --color-brick-border: #334155;
 }
 
 body {
-  @apply bg-white text-zinc-900 dark:bg-brick-navy dark:text-white;
+  @apply bg-brick-navy text-brick-text;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -30,25 +38,36 @@ body {
   scrollbar-width: none;
 }
 
+/* DayPicker dark mode overrides */
+.rdp {
+  --rdp-accent-color: #D4AF37;
+  --rdp-background-color: #1E293B;
+}
+.dark.rdp-day {
+  color: #fff;
+}
+.dark.rdp-day:hover:not(.rdp-day_disabled) {
+  background-color: #0A1929;
+}
+
+/* Print styles */
 @media print {
-  /* Hide interactive stuff */
   button,.no-print {
     display: none!important;
   }
 
-  /* Force colors to print */
     * {
     -webkit-print-color-adjust: exact!important;
     print-color-adjust: exact!important;
   }
 
-  /* Make gradients solid for PDF */
- .bg-gradient-to-r,.bg-gradient-to-br {
-    background: #f43f5e!important; /* rose-500 */
+  /* Make gold gradients solid for PDF */
+ .bg-brick-gold {
+    background: #D4AF37!important;
   }
 
-  /* Clean backgrounds */
   body {
     background: white!important;
+    color: black!important;
   }
 }
