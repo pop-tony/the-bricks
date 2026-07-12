@@ -2,7 +2,7 @@ import { Phone, MessageCircle } from 'lucide-react';
 
 export default function AgentCard({ agent }) {
   const { name, photo, phone, listings, sold } = agent;
-  const whatsappMsg = `Hi ${name}, I'm interested in a property from The Bricks`;
+  const whatsappMsg = `Hi ${name}, I'm interested in a property from the Bricks`;
 
   return (
     <div className="rounded-2xl bg-brick-card p-6 text-center border border-white/5">
