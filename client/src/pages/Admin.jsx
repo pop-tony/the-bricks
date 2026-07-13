@@ -74,13 +74,13 @@ const StatusBadge = ({ status, type = 'order' }) => {
 };
 
 const ORDER_STATUS_GROUPS = {
-  all: { label: 'All Orders', icon: Package, statuses: null },
+  all: { label: 'All Transactions', icon: Package, statuses: null },
   pending_sync: { label: 'Pending Sync', icon: AlertCircle, statuses: ['pending_sync'] },
-  pending: { label: 'Payment Pending', icon: Clock, statuses: ['pending'] },
-  paid: { label: 'Paid', icon: CheckCircle, statuses: ['paid'] },
-  processing: { label: 'Processing', icon: Package, statuses: ['processing'] },
-  shipped: { label: 'Shipped', icon: Truck, statuses: ['shipped', 'out_for_delivery'] },
-  delivered: { label: 'Delivered', icon: CheckCircle, statuses: ['delivered'] },
+  pending: { label: 'New Inquiry', icon: Clock, statuses: ['pending'] },
+  paid: { label: 'Offer Accepted', icon: CheckCircle, statuses: ['paid'] },
+  processing: { label: 'Under Offer', icon: Package, statuses: ['processing'] },
+  shipped: { label: 'Under Contract', icon: Truck, statuses: ['shipped', 'out_for_delivery'] },
+  delivered: { label: 'Closed Sale', icon: CheckCircle, statuses: ['delivered'] },
   cancelled: { label: 'Cancelled', icon: XCircle, statuses: ['cancelled', 'returned'] }
 };
 
@@ -307,7 +307,7 @@ export const Admin = () => {
       <StatCard title="Total Properties" value={properties.length} icon={Home} subtext="all listings" />
       <StatCard title="Published" value={propertyStatusCounts.published || 0} icon={CheckCircle} subtext="live listings" />
       <StatCard title="Sold" value={propertyStatusCounts.sold || 0} icon={DollarSign} subtext="closed sales" />
-      <StatCard title="Customers" value={analytics.totalCustomers} change={analytics.totalCustomersChange} icon={Users} subtext="this week" />
+      <StatCard title="Clients" value={analytics.totalCustomers} change={analytics.totalCustomersChange} icon={Users} subtext="this week" />
 
       <div className="lg:col-span-4 grid gap-6 grid-cols-1 sm:grid-cols-4 mt-4">
         <StatCard title="Total Revenue" value={formatCurrency(analytics.totalRevenueAll)} change={analytics.totalRevenueChange} icon={DollarSign} subtext="all time" />
@@ -378,10 +378,10 @@ export const Admin = () => {
 
       <div className="overflow-hidden rounded-3xl border border-brick-subtle bg-brick-white shadow-sm">
         <div className="grid grid-cols-6 gap-4 border-b border-brick-subtle bg-brick-offwhite px-6 py-4 text-xs uppercase tracking-[0.15em] text-brick-muted">
-          <span className="col-span-2">Order</span>
+          <span className="col-span-2">Sale</span>
           <span>Status</span>
           <span>Date</span>
-          <span>Amount</span>
+          <span>Price</span>
           <span className="text-right">Actions</span>
         </div>
         <div className="max-h-[520px] overflow-y-auto">
@@ -624,10 +624,10 @@ export const Admin = () => {
 
   const tabs = [
     { id: 'overview', label: 'Overview' },
-    { id: 'orders', label: 'Orders' },
+    { id: 'orders', label: 'Sales' },
     { id: 'properties', label: 'Properties' },
     { id: 'enquiries', label: 'Enquiries' },
-    { id: 'customers', label: 'Customers' }
+    { id: 'customers', label: 'Clients' }
   ];
 
   if (loading) {
@@ -652,8 +652,8 @@ export const Admin = () => {
               <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} transition={{ duration: 0.4, ease }} className="relative w-full max-w-5xl overflow-hidden bg-brick-white shadow-luxe">
                 <div className="sticky top-0 z-10 flex items-center justify-between border-b border-brick-subtle bg-brick-white p-8">
                   <div>
-                    <p className="text-brick-gold text-xs tracking-[0.2em] uppercase">Order Details</p>
-                    <h2 className="font-serif mt-1 text-2xl text-brick-black">#{order._id.slice(-8).toUpperCase()}</h2>
+                    <p className="text-brick-gold text-xs tracking-[0.2em] uppercase">Sale Details</p>
+                      <h2 className="font-serif mt-1 text-2xl text-brick-black">#{order._id.slice(-8).toUpperCase()}</h2>
                   </div>
                   <button onClick={closeOrderModal} className="p-2 text-brick-muted transition-luxe hover:text-brick-charcoal">
                     <X className="h-5 w-5" />
@@ -668,7 +668,7 @@ export const Admin = () => {
                                 <div className="flex items-center justify-between">
                           <StatusBadge status={order.status} />
                           <div className="text-right">
-                            <p className="text-xs text-brick-muted">Placed on</p>
+                            <p className="text-xs text-brick-muted">Date</p>
                             <p className="text-sm font-medium text-brick-black">
                               {new Date(order.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                             </p>
@@ -693,7 +693,7 @@ export const Admin = () => {
 
                     <div className="space-y-6 lg:col-span-3">
                       <div className="border border-brick-subtle p-6">
-                        <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-4">Order Items</p>
+                        <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-4">Transaction Items</p>
                         <div className="space-y-4">
                           {items.map((item, i) => (
                             <div key={i} className="flex gap-4 border-b border-brick-subtle pb-4 last:border-0 last:pb-0">
@@ -715,7 +715,7 @@ export const Admin = () => {
                       </div>
 
                       <div className="border border-brick-subtle p-6">
-                        <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-4">Payment Summary</p>
+                        <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-4">Transaction Summary</p>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between text-brick-muted">
                             <span>Subtotal</span>
@@ -723,7 +723,7 @@ export const Admin = () => {
                           </div>
                           {order.shipping > 0 && (
                             <div className="flex justify-between text-brick-muted">
-                              <span>Shipping</span>
+                              <span>Fees</span>
                               <span className="font-medium text-brick-black">₵{order.shipping.toLocaleString()}</span>
                             </div>
                           )}
