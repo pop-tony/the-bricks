@@ -1,3 +1,11 @@
 export default function BlogPage() {
-    return <div className="min-h-screen bg-brick-navy pt-24 text-white px-4 py-16"><h1 className="text-4xl font-black">Blog</h1><p className="mt-4 text-zinc-400">Coming soon</p></div>
-  }
+  return (
+    <div className="min-h-screen bg-brick-white pt-32">
+      <div className="mx-auto max-w-4xl px-8 text-center">
+        <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-6">Journal</p>
+        <h1 className="font-serif text-5xl md:text-7xl text-brick-black">The Bricks Journal</h1>
+        <p className="mt-8 text-base text-brick-muted">Insights on Accra real estate. Coming soon.</p>
+      </div>
+    </div>
+  );
+}

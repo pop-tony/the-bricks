@@ -6,6 +6,7 @@ import { properties } from '../data/properties';
 import { Search, X, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const ease = [0.22, 1, 0.36, 1];
 const INITIAL_SHOW = 8;
 
 export default function PropertiesPage() {
@@ -13,7 +14,6 @@ export default function PropertiesPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [visibleCount, setVisibleCount] = useState(INITIAL_SHOW);
 
-  // Read from URL
   const urlStatus = searchParams.get('status') || 'all';
   const urlLocation = searchParams.get('location') || '';
   const urlType = searchParams.get('type') || '';
@@ -26,7 +26,6 @@ export default function PropertiesPage() {
     search: urlSearch
   });
 
-  // Sync URL when filters change
   useEffect(() => {
     const params = new URLSearchParams();
     if (filters.status!== 'all') params.set('status', filters.status);
@@ -34,10 +33,9 @@ export default function PropertiesPage() {
     if (filters.type) params.set('type', filters.type);
     if (filters.search.trim()) params.set('search', filters.search.trim());
     setSearchParams(params, { replace: true });
-    setVisibleCount(INITIAL_SHOW); // Reset pagination on filter change
+    setVisibleCount(INITIAL_SHOW);
   }, [filters, setSearchParams]);
 
-  // Update state when URL changes back/forward
   useEffect(() => {
     setFilters({
       status: urlStatus,
@@ -47,32 +45,15 @@ export default function PropertiesPage() {
     });
   }, [urlStatus, urlLocation, urlType, urlSearch]);
 
-  // Filter properties
   const filteredProperties = useMemo(() => {
     let result = properties;
-
-    if (filters.status!== 'all') {
-      result = result.filter(p => p.status.toLowerCase() === filters.status);
-    }
-
-    if (filters.location) {
-      result = result.filter(p =>
-        p.location.toLowerCase().replace(' ', '-') === filters.location
-      );
-    }
-
-    if (filters.type) {
-      result = result.filter(p => p.category.toLowerCase() === filters.type);
-    }
-
+    if (filters.status!== 'all') result = result.filter(p => p.status.toLowerCase() === filters.status);
+    if (filters.location) result = result.filter(p => p.location.toLowerCase().replace(' ', '-') === filters.location);
+    if (filters.type) result = result.filter(p => p.category.toLowerCase() === filters.type);
     if (filters.search.trim()) {
       const query = filters.search.toLowerCase();
-      result = result.filter(p =>
-        p.title.toLowerCase().includes(query) ||
-        p.location.toLowerCase().includes(query)
-      );
+      result = result.filter(p => p.title.toLowerCase().includes(query) || p.location.toLowerCase().includes(query));
     }
-
     return result;
   }, [filters]);
 
@@ -89,61 +70,65 @@ export default function PropertiesPage() {
     filters.status === 'new build'? 'New Developments' : 'All Properties';
 
   return (
-    <div className="min-h-screen bg-brick-navy text-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 pt-24">
+    <div className="min-h-screen bg-brick-white pt-24">
+      <div className="mx-auto max-w-7xl px-8 py-16">
         {/* Header */}
-        <div className="mb-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease }}
+          className="mb-12 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+        >
           <div>
-            <h1 className="mb-2 text-4xl font-black tracking-tight md:text-5xl">
+            <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-3">Browse</p>
+            <h1 className="font-serif text-5xl md:text-6xl text-brick-black">
               {pageTitle}
             </h1>
-            <p className="text-zinc-400">
+            <p className="mt-3 text-sm text-brick-muted">
               {filteredProperties.length} properties found in Accra
               {filters.location && ` • ${filters.location.replace('-', ' ')}`}
             </p>
           </div>
 
-          {/* Search + Filter Toggle */}
           <div className="flex w-full gap-3 lg:w-auto">
-            <div className="flex flex-1 rounded-2xl border border-white/10 bg-brick-card lg:w-80">
+            <div className="flex flex-1 border border-brick-subtle bg-brick-white lg:w-80">
               <input
                 type="text"
                 value={filters.search}
                 onChange={(e) => setFilters({...filters, search: e.target.value})}
-                placeholder="Search by location or title..."
-                className="flex-1 bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-500"
+                placeholder="Search location or title..."
+                className="flex-1 bg-transparent px-4 py-3 text-sm text-brick-charcoal outline-none placeholder:text-brick-muted"
               />
-              {filters.search && (
-                <button
-                  onClick={() => setFilters({...filters, search: ''})}
-                  className="p-3 text-zinc-400 hover:text-white"
-                >
+              {filters.search? (
+                <button onClick={() => setFilters({...filters, search: ''})} className="p-3 text-brick-muted hover:text-brick-charcoal">
                   <X className="h-4 w-4" />
                 </button>
+              ) : (
+                <div className="p-3 text-brick-gold">
+                  <Search className="h-4 w-4" />
+                </div>
               )}
-              <div className="m-1 rounded-xl bg-brick-gold p-2 text-brick-navy">
-                <Search className="h-4 w-4" />
-              </div>
             </div>
             <button
               onClick={() => setShowFilters(true)}
-              className="flex items-center gap-2 rounded-2xl border border-white/10 bg-brick-card px-4 py-3 text-white lg:hidden"
+              className="flex items-center gap-2 border border-brick-subtle bg-brick-white px-5 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brick-charcoal transition-luxe hover:border-brick-charcoal lg:hidden"
             >
               <SlidersHorizontal className="h-4 w-4" />
+              Filter
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Status Tabs */}
-        <div className="mb-8 flex gap-2 overflow-x-auto pb-2">
+        <div className="mb-12 flex gap-8 border-b border-brick-subtle">
           {['all', 'sale', 'rent', 'new build'].map(status => (
             <button
               key={status}
               onClick={() => setFilters({...filters, status})}
-              className={`whitespace-nowrap rounded-full px-6 py-2 text-sm font-semibold transition ${
+              className={`pb-4 text-sm font-medium uppercase tracking-[0.15em] transition-luxe ${
                 filters.status === status
-                 ? 'bg-brick-gold text-brick-navy'
-                  : 'bg-brick-card text-zinc-300 hover:bg-brick-card/80'
+                ? 'text-brick-black border-b-2 border-brick-gold'
+                  : 'text-brick-muted hover:text-brick-charcoal'
               }`}
             >
               {status === 'all'? 'All' : status === 'new build'? 'New Builds' : `For ${status}`}
@@ -151,9 +136,9 @@ export default function PropertiesPage() {
           ))}
         </div>
 
-        <div className="flex gap-8">
+        <div className="flex gap-12">
           {/* Sidebar - Desktop */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:block w-72">
             <FilterSidebar filters={filters} setFilters={setFilters} />
           </div>
 
@@ -166,13 +151,14 @@ export default function PropertiesPage() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onClick={() => setShowFilters(false)}
-                  className="fixed inset-0 z-40 bg-black/60 lg:hidden"
+                  className="fixed inset-0 z-40 bg-brick-black/60 backdrop-blur-sm lg:hidden"
                 />
                 <motion.div
-                  initial={{ x: -320 }}
+                  initial={{ x: '100%' }}
                   animate={{ x: 0 }}
-                  exit={{ x: -320 }}
-                  className="lg:hidden"
+                  exit={{ x: '100%' }}
+                  transition={{ duration: 0.5, ease }}
+                  className="fixed right-0 top-0 z-50 h-full w-full max-w-sm bg-brick-white lg:hidden"
                 >
                   <FilterSidebar
                     filters={filters}
@@ -189,45 +175,32 @@ export default function PropertiesPage() {
           <div className="flex-1">
             {filteredProperties.length === 0? (
               <div className="py-32 text-center">
-                <p className="mb-4 text-xl text-zinc-400">No properties found</p>
+                <p className="font-serif text-2xl text-brick-black mb-4">No properties found</p>
                 <button
                   onClick={clearFilters}
-                  className="font-semibold text-brick-gold hover:underline"
+                  className="text-sm font-medium uppercase tracking-[0.15em] text-brick-gold hover:underline"
                 >
                   Clear all filters
                 </button>
               </div>
             ) : (
               <>
-                <motion.div
-                  layout
-                  className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4"
-                >
-                  <AnimatePresence initial={false}>
-                    {visibleProperties.map((property, i) => (
-                      <motion.div
-                        key={property.id}
-                        layout
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.2, delay: i * 0.03 }}
-                      >
-                        <PropertyCard property={property} />
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </motion.div>
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+                  {visibleProperties.map((property, i) => (
+                    <PropertyCard key={property.id} property={property} />
+                  ))}
+                </div>
 
                 {hasMore && (
-                  <div className="mt-12 text-center">
-                    <button
+                  <div className="mt-16 text-center">
+                    <motion.button
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => setVisibleCount(prev => prev + INITIAL_SHOW)}
-                      className="inline-flex items-center gap-2 rounded-full border-2 border-brick-gold px-8 py-3 font-bold text-brick-gold transition hover:bg-brick-gold hover:text-brick-navy"
+                      className="border border-brick-charcoal px-10 py-4 text-xs font-medium uppercase tracking-[0.2em] text-brick-charcoal transition-luxe hover:bg-brick-charcoal hover:text-brick-white"
                     >
-                      Show More <ChevronDown className="h-4 w-4" />
-                    </button>
-                    <p className="mt-3 text-sm text-zinc-500">
+                      Load More Properties
+                    </motion.button>
+                    <p className="mt-4 text-xs text-brick-muted">
                       Showing {visibleCount} of {filteredProperties.length} properties
                     </p>
                   </div>

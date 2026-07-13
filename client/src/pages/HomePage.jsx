@@ -1,8 +1,13 @@
 import HeroSearch from '../components/HeroSearch';
 import PropertyCard from '../components/PropertyCard';
+import ServiceCard from '../components/ServiceCard';
+import TrustBar from '../components/TrustBar';
 import { Building2, Key, Hammer, ClipboardList } from 'lucide-react';
 import { properties } from '../data/properties';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+const ease = [0.22, 1, 0.36, 1];
 
 const services = [
   { icon: Hammer, title: 'Build', desc: 'Modern developments across Accra', link: '/developments' },
@@ -15,51 +20,71 @@ export default function HomePage() {
   const featured = properties.slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-brick-navy">
+    <div className="min-h-screen bg-brick-white">
       <HeroSearch />
-
-      {/* Trust Bar */}
-      <section className="border-y border-white/5 bg-brick-card/50 py-8">
-        <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-8 px-4 text-center md:gap-16">
-          <div><p className="text-3xl font-black text-white">200+</p><p className="text-sm text-zinc-400">Properties</p></div>
-          <div><p className="text-3xl font-black text-white">GREDA</p><p className="text-sm text-zinc-400">Licensed</p></div>
-          <div><p className="text-3xl font-black text-white">10+</p><p className="text-sm text-zinc-400">Years in Accra</p></div>
-        </div>
-      </section>
+      
+      <TrustBar />
 
       {/* Featured Properties */}
-      <section className="mx-auto max-w-7xl px-4 py-16">
-        <div className="mb-8 flex items-end justify-between">
-          <div>
-            <h2 className="text-3xl font-black text-white md:text-4xl">Featured Listings</h2>
-            <p className="mt-2 text-zinc-400">Handpicked properties in Accra</p>
-          </div>
-          <Link to="/properties" className="text-sm font-bold text-brick-gold hover:underline">
-            View All →
+      <section className="mx-auto max-w-7xl px-8 py-24">
+        <div className="mb-16 flex items-end justify-between border-b border-brick-subtle pb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease }}
+          >
+            <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-4">Curated Selection</p>
+            <h2 className="font-serif text-4xl md:text-5xl text-brick-black">Featured Listings</h2>
+            <p className="mt-4 text-brick-muted">Handpicked properties in Accra</p>
+          </motion.div>
+          <Link 
+            to="/properties" 
+            className="group flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-brick-charcoal transition-luxe hover:text-brick-gold"
+          >
+            View All
+            <span className="h-px w-8 bg-brick-gold transition-luxe group-hover:w-12" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map(p => <PropertyCard key={p.id} property={p} />)}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((p, i) => (
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease }}
+            >
+              <PropertyCard property={p} />
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* Services */}
-      <section className="bg-brick-card/30 py-16">
-        <div className="mx-auto max-w-7xl px-4">
-          <h2 className="mb-12 text-center text-3xl font-black text-white md:text-4xl">
-            What We Do
-          </h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {services.map(s => (
-              <Link
+      <section className="bg-brick-offwhite py-24">
+        <div className="mx-auto max-w-7xl px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease }}
+            className="mb-16 text-center"
+          >
+            <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-4">Services</p>
+            <h2 className="font-serif text-4xl md:text-5xl text-brick-black">What We Do</h2>
+          </motion.div>
+          <div className="divide-y divide-brick-subtle">
+            {services.map((s, i) => (
+              <motion.div
                 key={s.title}
-                to={s.link}
-                className="group rounded-2xl border border-white/5 bg-brick-card p-8 transition hover:border-brick-gold/50"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease }}
               >
-                <s.icon className="h-10 w-10 text-brick-gold" />
-                <h3 className="mt-4 text-xl font-bold text-white">{s.title}</h3>
-                <p className="mt-2 text-zinc-400">{s.desc}</p>
-              </Link>
+                <ServiceCard {...s} />
+              </motion.div>
             ))}
           </div>
         </div>

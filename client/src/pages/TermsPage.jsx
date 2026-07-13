@@ -1,91 +1,72 @@
-import React from 'react'
+import { motion } from 'framer-motion';
+
+const ease = [0.22, 1, 0.36, 1];
 
 export default function Terms() {
+  const sections = [
+    {
+      title: "1. Agreement to Terms",
+      content: "By accessing The Bricks Properties website or engaging our services, you agree to be bound by these Terms of Service. If you do not agree, please discontinue use of our platform."
+    },
+    {
+      title: "2. Property Listings & Accuracy",
+      content: "All property information, including prices, specifications, and availability, is provided by sellers or their agents. While we verify listings, The Bricks does not guarantee absolute accuracy. Prices are listed in Ghana Cedis (₵) and subject to change. Buyers are advised to conduct independent due diligence."
+    },
+    {
+      title: "3. Agent Services & Commissions",
+      content: "Our agents act as intermediaries between buyers and sellers. Commission structures are disclosed prior to engagement and payable upon successful closing. The Bricks reserves the right to refuse service at our discretion."
+    },
+    {
+      title: "4. Viewing Appointments",
+      content: "Viewing fees of GHS 100 apply to secure appointments and are non-refundable. Fees are credited toward commission if a purchase is completed within 90 days through The Bricks. Cancellations must be made 24 hours in advance."
+    },
+    {
+      title: "5. Intellectual Property",
+      content: "All content on this site, including property photos, descriptions, logos, and branding, is property of The Bricks Properties and protected by copyright. Unauthorized reproduction is prohibited."
+    },
+    {
+      title: "6. Limitation of Liability",
+      content: "The Bricks is not liable for indirect or consequential damages arising from property transactions. Our total liability shall not exceed the commission received for the specific transaction."
+    },
+    {
+      title: "7. Privacy & Data",
+      content: "We collect personal information to facilitate transactions. Data is stored securely and never sold to third parties. See our Privacy Policy for full details."
+    },
+    {
+      title: "8. Contact",
+      content: "Questions regarding these Terms? Contact us at legal@thebricks.com or +233 XX XXX XXXX. Our office is located in East Legon, Accra."
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-white px-4 py-24 text-zinc-900 dark:bg-black dark:text-white">
-      <div className="mx-auto max-w-4xl">
-        <h1 className="mb-2 text-5xl font-black">Terms of Service</h1>
-        <p className="mb-12 text-sm text-zinc-500 dark:text-zinc-400">Last updated: June 4, 2026</p>
+    <div className="min-h-screen bg-brick-white pt-32 pb-24">
+      <div className="mx-auto max-w-4xl px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease }}
+        >
+          <p className="text-brick-gold text-xs tracking-[0.3em] uppercase">Legal</p>
+          <h1 className="font-serif mt-3 text-5xl md:text-6xl text-brick-black">Terms of Service</h1>
+          <p className="mt-6 text-sm text-brick-muted">Last updated: June 4, 2026</p>
+        </motion.div>
 
-        <div className="space-y-8 text-zinc-700 dark:text-zinc-300">
-          <section>
-            <h2 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white">1. Agreement to Terms</h2>
-            <p>
-              By accessing or purchasing from Emma Studio, you agree to be bound by these Terms of Service. 
-              If you do not agree, please do not use our website or services.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white">2. Products & Pricing</h2>
-            <p className="mb-2">
-              All prices are listed in Ghana Cedis (₵) and include applicable taxes unless stated otherwise. 
-              We reserve the right to change prices at any time without notice.
-            </p>
-            <p>
-              Product colors may vary slightly due to screen differences. Sizes are based on standard measurements. 
-              Refer to our size guide before purchasing.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white">3. Orders & Payment</h2>
-            <p className="mb-2">
-              Payment is processed securely via Paystack. By placing an order, you authorize us to charge your 
-              selected payment method for the total amount displayed at checkout.
-            </p>
-            <p>
-              We reserve the right to refuse or cancel orders for reasons including product availability, 
-              errors in pricing, or suspected fraud.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white">4. Shipping & Delivery</h2>
-            <p className="mb-2">
-              Orders are processed within 1-3 business days. Delivery times vary by location within Ghana. 
-              Free shipping applies to orders over ₵500.
-            </p>
-            <p>
-              Risk of loss passes to you upon delivery. You are responsible for providing accurate shipping information.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white">5. Returns & Refunds</h2>
-            <p className="mb-2">
-              Returns accepted within 7 days of delivery if items are unworn, unwashed, and in original packaging with tags attached. 
-              Sale items are final and non-returnable.
-            </p>
-            <p>
-              Refunds are issued to the original payment method within 5-10 business days after we receive and inspect the return. 
-              Customer is responsible for return shipping costs unless the item was defective.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white">6. Intellectual Property</h2>
-            <p>
-              All content on this site, including designs, logos, text, and images, is property of Emma Studio 
-              and protected by copyright. You may not reproduce or distribute without permission.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white">7. Limitation of Liability</h2>
-            <p>
-              Emma Studio is not liable for indirect, incidental, or consequential damages arising from use of our products or website. 
-              Our total liability shall not exceed the amount you paid for the product.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white">8. Contact</h2>
-            <p>
-              Questions about these Terms? Email us at <span className="font-semibold">support@emmastudio.com</span> or 
-              call <span className="font-semibold">+233 XX XXX XXXX</span>.
-            </p>
-          </section>
+        <div className="mt-16 space-y-12">
+          {sections.map((section, i) => (
+            <motion.section
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: i * 0.05, ease }}
+              className="border-b border-brick-subtle pb-12 last:border-0"
+            >
+              <h2 className="font-serif text-2xl text-brick-black mb-4">{section.title}</h2>
+              <p className="text-sm leading-relaxed text-brick-muted">
+                {section.content}
+              </p>
+            </motion.section>
+          ))}
         </div>
       </div>
     </div>

@@ -14,23 +14,14 @@ import CareersPage from './pages/CareersPage';
 import BlogPage from './pages/BlogPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
-import { useEffect, useState } from 'react';
+import { Admin } from './pages/Admin';
 
 export default function App() {
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
-
   return (
-      <div className="flex min-h-screen flex-col bg-brick-navy">
+      <div className="flex min-h-screen flex-col bg-brick-offwhite text-brick-charcoal dark:bg-brick-black dark:text-brick-charcoal">
         <Navbar />
-        <main className="flex-1">
+        {/* pt-20 = 80px for h-20 navbar. Change to pt-24 for 16px gap */}
+        <main className="flex-1 pt-20">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/properties" element={<PropertiesPage />} />
@@ -45,9 +36,11 @@ export default function App() {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
         <Footer />
       </div>
+    
   );
 }

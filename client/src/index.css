@@ -1,73 +1,107 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark,.dark *));
-
-* {
-  font-family: "Manrope", sans-serif;
-  font-weight: 500;
-}
-
 @theme {
-  /* Light mode colors */
-  --color-brick-navy: #FFFFFF;
-  --color-brick-gold: #B8941F;
-  --color-brick-card: #F1F5F9;
-  --color-brick-text: #0F172A;
-  --color-brick-border: #E2E8F0;
+  /* Colors - use these as bg-brick-white, text-brick-gold, etc */
+  --color-brick-white: #ffffff;
+  --color-brick-offwhite: #FBFAF8;
+  --color-brick-black: #0A0A0A;
+  --color-brick-charcoal: #1C1C1C;
+  --color-brick-gold: #B89B5E;
+  --color-brick-gold-light: #D5C5A1;
+  --color-brick-card: #F7F6F3;
+  --color-brick-subtle: #E8E6E1;
+  --color-brick-muted: #6B6B6B;
+
+  /* Fonts */
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+
+  /* Custom easing */
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Shadows */
+  --shadow-luxe: 0 25px 50px -12px rgba(10,10,10,0.08);
 }
 
-/* Dark mode overrides */
-.dark {
-  --color-brick-navy: #0A1929;
-  --color-brick-gold: #D4AF37;
-  --color-brick-card: #1E293B;
-  --color-brick-text: #FFFFFF;
-  --color-brick-border: #334155;
+@layer base {
+  html.dark {
+    color-scheme: dark;
+    --color-brick-white: #0A0A0A;
+    --color-brick-offwhite: #111111;
+    --color-brick-black: #F7F6F3;
+    --color-brick-charcoal: #D5C5A1;
+    --color-brick-gold: #B89B5E;
+    --color-brick-gold-light: #D5C5A1;
+    --color-brick-card: #141212;
+    --color-brick-subtle: #2A2723;
+    --color-brick-muted: #B3AA9A;
+  }
+
+  html, body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-brick-white);
+    color: var(--color-brick-charcoal);
+  }
+
+  html.dark, html.dark body {
+    background-color: var(--color-brick-white);
+    color: var(--color-brick-charcoal);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--color-brick-black);
+  }
+
+  /* Remove all default rounded corners */
+  button, input, select, textarea {
+    border-radius: 0;
+  }
+
+ .hide-scrollbar::-webkit-scrollbar { display: none; }
+ .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
 
-body {
-  @apply bg-brick-navy text-brick-text;
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* DayPicker dark mode overrides */
+/* DayPicker overrides */
 .rdp {
-  --rdp-accent-color: #D4AF37;
-  --rdp-background-color: #1E293B;
+  --rdp-accent-color: var(--color-brick-gold);
+  --rdp-background-color: var(--color-brick-gold);
+  margin: 0;
 }
-.dark.rdp-day {
-  color: #fff;
-}
-.dark.rdp-day:hover:not(.rdp-day_disabled) {
-  background-color: #0A1929;
+
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: var(--color-brick-card);
 }
 
 /* Print styles */
 @media print {
-  button,.no-print {
-    display: none!important;
+  button,.no-print { display: none!important; }
+    * { -webkit-print-color-adjust: exact!important; print-color-adjust: exact!important; }
+ .bg-brick-gold { background: var(--color-brick-gold)!important; }
+  body { background: white!important; color: black!important; }
+}
+
+@layer utilities {
+  /* 3D Support for Framer Motion cards */
+ .perspective-1000 { perspective: 1000px; }
+ .preserve-3d { transform-style: preserve-3d; }
+ .backface-hidden { backface-visibility: hidden; }
+
+  /* Luxury transitions */
+ .transition-luxe {
+    transition: all 0.5s var(--ease-luxe);
   }
 
-    * {
-    -webkit-print-color-adjust: exact!important;
-    print-color-adjust: exact!important;
-  }
-
-  /* Make gold gradients solid for PDF */
- .bg-brick-gold {
-    background: #D4AF37!important;
-  }
-
-  body {
-    background: white!important;
-    color: black!important;
+  /* Gold gradient for special text */
+ .text-gradient-gold {
+    background: linear-gradient(90deg, #B89B5E, #D5C5A1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
