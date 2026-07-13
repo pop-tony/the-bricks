@@ -1,5 +1,6 @@
 import { Phone, MessageCircle } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { loop3DRotate, float3D } from '../lib/motion';
 import { useRef } from 'react';
 
 export default function AgentCard({ agent }) {
@@ -42,13 +43,15 @@ export default function AgentCard({ agent }) {
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      animate={loop3DRotate({ duration: 22 })}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="perspective-1000"
     >
-      <div 
+      <motion.div 
         style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }}
         className="bg-brick-white border border-brick-subtle p-8 text-center shadow-luxe"
+        animate={float3D({ duration: 7 })}
       >
         <div className="mx-auto h-28 w-28 overflow-hidden border-2 border-brick-gold">
           <motion.img 
@@ -80,7 +83,7 @@ export default function AgentCard({ agent }) {
             <Phone className="h-4 w-4" />
           </a>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

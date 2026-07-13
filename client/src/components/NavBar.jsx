@@ -40,9 +40,9 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-8 py-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center bg-brick-gold transition-luxe group-hover:bg-brick-charcoal">
+          <motion.div animate={{ rotateY: [0, 360] }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }} className="flex h-10 w-10 items-center justify-center bg-brick-gold transition-luxe group-hover:bg-brick-charcoal">
             <span className="font-serif text-xl text-brick-black group-hover:text-brick-gold transition-luxe">B</span>
-          </div>
+          </motion.div>
           <span className={`font-serif text-2xl transition-luxe ${scrolled ? 'text-brick-black' : 'text-brick-white'}`}>
             The<span className="text-brick-gold">Bricks</span>
           </span>

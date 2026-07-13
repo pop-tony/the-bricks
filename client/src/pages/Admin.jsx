@@ -208,6 +208,14 @@ export const Admin = () => {
       return { date: d, day: days[d.getDay()], revenue: 0 };
     });
 
+    // helpers for monthly totals
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    const prevMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+
+    let totalRevenueAll = 0;
+    let thisMonthRevenue = 0;
+    let lastMonthRevenue = 0;
+
     let thisWeekRevenue = 0, lastWeekRevenue = 0, todayRevenue = 0, yesterdayRevenue = 0, activeOrders = 0;
     const salesByItem = {};
     const thisWeekCustomerEmails = new Set();
@@ -218,6 +226,9 @@ export const Admin = () => {
       const isCancelled = ['cancelled', 'returned'].includes(o.status);
 
       if (!isCancelled) {
+        totalRevenueAll += o.total || 0;
+        if (d >= monthStart) thisMonthRevenue += o.total || 0;
+        if (d >= prevMonthStart && d < monthStart) lastMonthRevenue += o.total || 0;
         if (d >= weekAgo) {
           thisWeekRevenue += o.total || 0;
           if (o.email) thisWeekCustomerEmails.add(o.email);
@@ -253,8 +264,12 @@ export const Admin = () => {
     };
 
     return {
-      totalRevenue: Math.round(thisWeekRevenue),
+      totalRevenueAll: Math.round(totalRevenueAll),
       totalRevenueChange: getChange(thisWeekRevenue, lastWeekRevenue),
+      monthRevenue: Math.round(thisMonthRevenue),
+      monthRevenueChange: getChange(thisMonthRevenue, lastMonthRevenue),
+      weekRevenue: Math.round(thisWeekRevenue),
+      weekRevenueChange: getChange(thisWeekRevenue, lastWeekRevenue),
       todayRevenue: Math.round(todayRevenue),
       todayRevenueChange: getChange(todayRevenue, yesterdayRevenue),
       activeOrders,
@@ -293,6 +308,13 @@ export const Admin = () => {
       <StatCard title="Published" value={propertyStatusCounts.published || 0} icon={CheckCircle} subtext="live listings" />
       <StatCard title="Sold" value={propertyStatusCounts.sold || 0} icon={DollarSign} subtext="closed sales" />
       <StatCard title="Customers" value={analytics.totalCustomers} change={analytics.totalCustomersChange} icon={Users} subtext="this week" />
+
+      <div className="lg:col-span-4 grid gap-6 grid-cols-1 sm:grid-cols-4 mt-4">
+        <StatCard title="Total Revenue" value={formatCurrency(analytics.totalRevenueAll)} change={analytics.totalRevenueChange} icon={DollarSign} subtext="all time" />
+        <StatCard title="Monthly Revenue" value={formatCurrency(analytics.monthRevenue)} change={analytics.monthRevenueChange} icon={TrendingUp} subtext="this month" />
+        <StatCard title="Weekly Revenue" value={formatCurrency(analytics.weekRevenue)} change={analytics.weekRevenueChange} icon={TrendingUp} subtext="this week" />
+        <StatCard title="Daily Revenue" value={formatCurrency(analytics.todayRevenue)} change={analytics.todayRevenueChange} icon={TrendingUp} subtext="today" />
+      </div>
 
       <div className="lg:col-span-2 mt-6 rounded-3xl border border-brick-subtle bg-brick-white p-8">
         <div className="flex items-center justify-between gap-4">

@@ -1,5 +1,6 @@
 import { Bed, Bath, MapPin, Bookmark, Move, ArrowUpRight } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { float3D, loop3DRotate } from '../lib/motion';
 import { Link } from 'react-router-dom';
 import { useState, useRef } from 'react';
 
@@ -33,13 +34,15 @@ export default function PropertyCard({ property }) {
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
+      animate={loop3DRotate({ duration: 18 })}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, ease }}
       className="perspective-1000 group"
     >
-      <div
+      <motion.div
         style={{ transform: "translateZ(40px)" }}
         className="bg-brick-white border border-brick-subtle shadow-luxe transition-luxe hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)]"
+        animate={float3D({ duration: 9 })}
       >
         <Link to={`/properties/${id}`}>
           <div className="relative aspect-[4/3] overflow-hidden">
@@ -107,7 +110,7 @@ export default function PropertyCard({ property }) {
             <ArrowUpRight className="h-4 w-4 text-brick-gold opacity-0 transition-luxe group-hover:opacity-100" />
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
