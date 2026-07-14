@@ -12,7 +12,7 @@ export default function TrustBar() {
 
   return (
     <section className="border-y border-brick-subtle bg-brick-white py-16">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-8 md:grid-cols-3 md:gap-0">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-12 px-8 md:grid-cols-3 md:gap-0">
         {stats.map((stat, i) => (
           <motion.div
             key={i}

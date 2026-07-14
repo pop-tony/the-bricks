@@ -35,7 +35,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-brick-subtle bg-brick-white">
       <div className="mx-auto max-w-7xl px-8 py-24">
-        <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-20 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -73,32 +73,54 @@ export default function Footer() {
           </motion.div>
 
           {/* Link columns */}
-          {Object.entries(links).map(([title, items], idx) => (
-            <motion.div 
-              key={title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1 * (idx + 1), ease }}
-            >
-              <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-6">
-                {title === 'areas' ? 'Top Areas' : title}
-              </p>
-              <ul className="space-y-4">
-                {items.map(link => (
-                  <li key={link.name}>
-                    <Link 
-                      to={link.path} 
-                      className="group flex items-center gap-2 text-sm text-brick-muted transition-luxe hover:text-brick-charcoal"
+          <div className='grid grid-cols-3 gap-10 sm:grid-cols-3 lg:grid-cols-3 lg:gap-60'>
+            {Object.entries(links).map(([title, items], idx) => (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 * (idx + 1), ease }}
+                className="relative w-50"
+              >
+                {/* Gold accent line - desktop only */}
+                <motion.div
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 * idx, ease }}
+                  className="absolute -left-4 top-0 hidden h-full w-px origin-top bg-brick-subtle lg:block"
+                />
+
+                <p className="text-brick-gold text- tracking-[0.2em] uppercase mb-6 lg:mb-8">
+                  {title === 'areas'? 'Top Areas' : title}
+                </p>
+
+                <ul className="space-y-4 lg:space-y-5">
+                  {items.map((link, i) => (
+                    <motion.li
+                      key={link.name}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.05 * i + 0.15 * idx, ease }}
                     >
-                      {link.name}
-                      <ArrowUpRight className="h-3 w-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-luxe" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+                      <Link
+                        to={link.path}
+                        className="group inline-flex items-center gap-2 text- lg:text-sm text-brick-muted transition-luxe hover:text-brick-black"
+                      >
+                        <span className="relative">
+                          {link.name}
+                          <span className="absolute -bottom-1 left-0 h-px w-0 bg-brick-gold transition-all duration-300 group-hover:w-full" />
+                        </span>
+                        <ArrowUpRight className="h-3 w-3 shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-luxe text-brick-gold" />
+                      </Link>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Contact Bar */}

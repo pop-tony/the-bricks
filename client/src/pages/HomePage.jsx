@@ -46,7 +46,7 @@ export default function HomePage() {
             <span className="h-px w-8 bg-brick-gold transition-luxe group-hover:w-12" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p, i) => (
             <motion.div
               key={p.id}

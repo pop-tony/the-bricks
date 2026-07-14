@@ -185,7 +185,7 @@ export default function PropertiesPage() {
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-2 gap-8 md:grid-cols-2 xl:grid-cols-3">
                   {visibleProperties.map((property, i) => (
                     <PropertyCard key={property.id} property={property} />
                   ))}
