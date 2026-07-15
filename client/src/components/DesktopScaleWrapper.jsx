@@ -1,6 +1,10 @@
 import { useLayoutEffect, useState, useRef } from 'react';
 
-const DESIGN_WIDTH = 1280; // laptop design width - change to 1440 if your design is wider
+// ADJUST THESE TO MAKE MOBILE LARGER/SMALLER
+const DESIGN_WIDTH = 1024; // was 1280 - smaller = larger on mobile
+const SCALE_BOOST = 1.35; // 1.35 = 35% larger than strict fit
+const MIN_SCALE = 0.42; // never smaller than 42% - prevents tiny text
+const MAX_SCALE = 1;
 
 export default function DesktopScaleWrapper({ children }) {
   const [scale, setScale] = useState(1);
@@ -10,7 +14,10 @@ export default function DesktopScaleWrapper({ children }) {
   useLayoutEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      const s = Math.min(1, w / DESIGN_WIDTH);
+      let s = (w / DESIGN_WIDTH) * SCALE_BOOST;
+      s = Math.max(MIN_SCALE, Math.min(MAX_SCALE, s));
+      // On large screens, keep 1
+      if (w >= DESIGN_WIDTH) s = 1;
       setScale(s);
       if (innerRef.current) {
         setHeight(innerRef.current.offsetHeight * s);
@@ -20,10 +27,8 @@ export default function DesktopScaleWrapper({ children }) {
     update();
     window.addEventListener('resize', update);
     window.addEventListener('orientationchange', update);
-
     const ro = new ResizeObserver(update);
     if (innerRef.current) ro.observe(innerRef.current);
-
     return () => {
       window.removeEventListener('resize', update);
       window.removeEventListener('orientationchange', update);
