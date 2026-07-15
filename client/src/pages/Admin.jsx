@@ -303,20 +303,20 @@ export const Admin = () => {
   const formatCurrency = (value) => `₵${Number(value || 0).toLocaleString()}`;
 
   const OverviewTab = ({ analytics }) => (
-    <div className="grid gap-6 lg:grid-cols-4">
+    <div className="grid gap-6 grid-cols-4">
       <StatCard title="Total Properties" value={properties.length} icon={Home} subtext="all listings" />
       <StatCard title="Published" value={propertyStatusCounts.published || 0} icon={CheckCircle} subtext="live listings" />
       <StatCard title="Sold" value={propertyStatusCounts.sold || 0} icon={DollarSign} subtext="closed sales" />
       <StatCard title="Clients" value={analytics.totalCustomers} change={analytics.totalCustomersChange} icon={Users} subtext="this week" />
 
-      <div className="lg:col-span-4 grid gap-6 grid-cols-1 sm:grid-cols-4 mt-4">
+      <div className="col-span-4 grid gap-6 mt-4 grid-cols-4">
         <StatCard title="Total Revenue" value={formatCurrency(analytics.totalRevenueAll)} change={analytics.totalRevenueChange} icon={DollarSign} subtext="all time" />
         <StatCard title="Monthly Revenue" value={formatCurrency(analytics.monthRevenue)} change={analytics.monthRevenueChange} icon={TrendingUp} subtext="this month" />
         <StatCard title="Weekly Revenue" value={formatCurrency(analytics.weekRevenue)} change={analytics.weekRevenueChange} icon={TrendingUp} subtext="this week" />
         <StatCard title="Daily Revenue" value={formatCurrency(analytics.todayRevenue)} change={analytics.todayRevenueChange} icon={TrendingUp} subtext="today" />
       </div>
 
-      <div className="lg:col-span-2 mt-6 rounded-3xl border border-brick-subtle bg-brick-white p-8">
+      <div className="col-span-2 mt-6 rounded-3xl border border-brick-subtle bg-brick-white p-8">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-brick-gold text-xs uppercase tracking-[0.2em]">Weekly revenue</p>
@@ -339,7 +339,7 @@ export const Admin = () => {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:col-span-2 lg:grid-cols-2 mt-6">
+      <div className="grid gap-6 col-span-2 mt-6 grid-cols-2">
         {Object.entries(PROPERTY_STATUS_GROUPS).slice(0, 4).map(([key, group]) => {
           const Icon = group.icon;
           return (
@@ -360,7 +360,7 @@ export const Admin = () => {
 
   const OrdersTab = () => (
     <div className="space-y-8">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-4 flex-row items-center justify-between">
         <div className="flex flex-wrap items-center gap-2">
           {Object.entries(ORDER_STATUS_GROUPS).map(([key, group]) => (
             <button key={key} onClick={() => setOrderStatusFilter(key)} className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.15em] transition-luxe ${orderStatusFilter === key ? 'border-brick-gold bg-brick-gold-light text-brick-black' : 'border-brick-subtle bg-transparent text-brick-charcoal hover:border-brick-charcoal hover:text-brick-black'}`}>
@@ -368,7 +368,7 @@ export const Admin = () => {
             </button>
           ))}
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="flex flex-col gap-3 flex-row items-center">
           <input value={orderSearch} onChange={(e) => setOrderSearch(e.target.value)} placeholder="Search orders..." className="w-full min-w-[220px] rounded-full border border-brick-subtle bg-brick-white px-4 py-3 text-sm text-brick-charcoal outline-none transition-luxe focus:border-brick-gold" />
           <button onClick={refreshOrders} className="rounded-full bg-brick-charcoal px-5 py-3 text-xs uppercase tracking-[0.2em] text-brick-white transition-luxe hover:bg-brick-gold hover:text-brick-black">
             {refreshing ? 'Refreshing...' : 'Refresh'}
@@ -377,7 +377,7 @@ export const Admin = () => {
       </div>
 
       <div className="overflow-hidden rounded-3xl border border-brick-subtle bg-brick-white shadow-sm">
-        <div className="grid grid-cols-6 gap-4 border-b border-brick-subtle bg-brick-offwhite px-6 py-4 text-xs uppercase tracking-[0.15em] text-brick-muted">
+        <div className="grid gap-4 border-b border-brick-subtle bg-brick-offwhite px-6 py-4 text-xs uppercase tracking-[0.15em] text-brick-muted grid-cols-6">
           <span className="col-span-2">Sale</span>
           <span>Status</span>
           <span>Date</span>
@@ -386,7 +386,7 @@ export const Admin = () => {
         </div>
         <div className="max-h-[520px] overflow-y-auto">
           {filteredOrders.map(order => (
-            <div key={order._id} className="grid grid-cols-6 gap-4 border-b border-brick-subtle px-6 py-5 text-sm text-brick-charcoal">
+            <div key={order._id} className="grid gap-4 border-b border-brick-subtle px-6 py-5 text-sm text-brick-charcoal grid-cols-6">
               <div className="col-span-2 space-y-1">
                 <p className="font-medium">#{order._id?.slice(-8).toUpperCase()}</p>
                 <p className="text-xs text-brick-muted">{order.customerName || order.email}</p>
@@ -412,7 +412,7 @@ export const Admin = () => {
 
   const PropertiesTab = () => (
     <div className="space-y-8">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-4 flex-row items-center justify-between">
         <div className="flex flex-wrap items-center gap-2">
           {Object.entries(PROPERTY_STATUS_GROUPS).map(([key, group]) => (
             <button key={key} onClick={() => setPropertyStatusFilter(key)} className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.15em] transition-luxe ${propertyStatusFilter === key ? 'border-brick-gold bg-brick-gold-light text-brick-black' : 'border-brick-subtle bg-transparent text-brick-charcoal hover:border-brick-charcoal hover:text-brick-black'}`}>
@@ -420,7 +420,7 @@ export const Admin = () => {
             </button>
           ))}
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="flex flex-col gap-3 flex-row items-center">
           <input value={propertySearch} onChange={(e) => setPropertySearch(e.target.value)} placeholder="Search properties..." className="w-full min-w-[220px] rounded-full border border-brick-subtle bg-brick-white px-4 py-3 text-sm text-brick-charcoal outline-none transition-luxe focus:border-brick-gold" />
           <button onClick={() => openPropertyModal()} className="rounded-full bg-brick-charcoal px-5 py-3 text-xs uppercase tracking-[0.2em] text-brick-white transition-luxe hover:bg-brick-gold hover:text-brick-black">
             New Property
@@ -429,7 +429,7 @@ export const Admin = () => {
       </div>
 
       <div className="overflow-hidden rounded-3xl border border-brick-subtle bg-brick-white shadow-sm">
-        <div className="grid grid-cols-7 gap-4 border-b border-brick-subtle bg-brick-offwhite px-6 py-4 text-xs uppercase tracking-[0.15em] text-brick-muted">
+        <div className="grid gap-4 border-b border-brick-subtle bg-brick-offwhite px-6 py-4 text-xs uppercase tracking-[0.15em] text-brick-muted grid-cols-7">
           <span className="col-span-2">Property</span>
           <span>Location</span>
           <span>Category</span>
@@ -439,7 +439,7 @@ export const Admin = () => {
         </div>
         <div className="max-h-[520px] overflow-y-auto">
           {filteredProperties.map(property => (
-            <div key={property._id} className="grid grid-cols-7 gap-4 border-b border-brick-subtle px-6 py-5 text-sm text-brick-charcoal">
+            <div key={property._id} className="grid gap-4 border-b border-brick-subtle px-6 py-5 text-sm text-brick-charcoal grid-cols-7">
               <div className="col-span-2 space-y-1">
                 <p className="font-medium">{property.title}</p>
                 <p className="text-xs text-brick-muted">{property.beds} beds • {property.baths} baths</p>
@@ -465,7 +465,7 @@ export const Admin = () => {
   const EnquiriesTab = () => (
     <div className="space-y-8">
       <div className="rounded-3xl border border-brick-subtle bg-brick-white p-8">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-4 flex-row items-center justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-brick-muted">Enquiries</p>
             <h2 className="font-serif mt-2 text-2xl text-brick-black">Latest client consults</h2>
@@ -475,7 +475,7 @@ export const Admin = () => {
         <div className="mt-8 grid gap-4">
           {styleSessions.map(session => (
             <div key={session._id} className="rounded-3xl border border-brick-subtle p-6">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-3 flex-row items-center justify-between">
                 <div>
                   <p className="font-medium text-brick-black">{session.name || session.customerName || 'Client'}</p>
                   <p className="text-xs text-brick-muted">{session.email || session.phone}</p>
@@ -503,7 +503,7 @@ export const Admin = () => {
   const CustomersTab = () => (
     <div className="space-y-8">
       <div className="rounded-3xl border border-brick-subtle bg-brick-white p-8">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-4 flex-row items-center justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-brick-muted">Customers</p>
             <h2 className="font-serif mt-2 text-2xl text-brick-black">Top customers</h2>
@@ -513,7 +513,7 @@ export const Admin = () => {
         <div className="mt-8 grid gap-4">
           {customers.map(customer => (
             <div key={customer._id} className="rounded-3xl border border-brick-subtle p-6">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-4 flex-row items-center justify-between">
                 <div>
                   <p className="font-medium text-brick-black">{customer.name || customer.email}</p>
                   <p className="text-xs text-brick-muted">{customer.email}</p>
@@ -661,8 +661,8 @@ export const Admin = () => {
                 </div>
 
                 <div className="overflow-y-auto p-8" style={{ maxHeight: 'calc(90vh - 96px)' }}>
-                  <div className="grid gap-8 lg:grid-cols-5">
-                    <div className="space-y-6 lg:col-span-2">
+                  <div className="grid gap-8 grid-cols-5">
+                    <div className="space-y-6 col-span-2">
                       <div className="border border-brick-subtle p-6">
                         <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-4">Status</p>
                                 <div className="flex items-center justify-between">
@@ -691,7 +691,7 @@ export const Admin = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-6 lg:col-span-3">
+                    <div className="space-y-6 col-span-3">
                       <div className="border border-brick-subtle p-6">
                         <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-4">Transaction Items</p>
                         <div className="space-y-4">
@@ -823,8 +823,8 @@ export const Admin = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="overflow-y-auto p-8" style={{ maxHeight: 'calc(90vh - 96px)' }}>
-                  <div className="grid gap-6 md:grid-cols-2">
-                    <div className="md:col-span-2">
+                  <div className="grid gap-6 grid-cols-2">
+                    <div className="col-span-2">
                       <label className="text-xs uppercase tracking-[0.15em] text-brick-muted">Property Title</label>
                       <input type="text" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} required className="mt-2 w-full border-b border-brick-subtle bg-transparent py-3 text-sm text-brick-charcoal outline-none transition-luxe focus:border-brick-gold" />
                     </div>
@@ -874,12 +874,12 @@ export const Admin = () => {
                       <input type="number" value={formData.size} onChange={(e) => setFormData({...formData, size: e.target.value})} className="mt-2 w-full border-b border-brick-subtle bg-transparent py-3 text-sm text-brick-charcoal outline-none transition-luxe focus:border-brick-gold" />
                     </div>
 
-                    <div className="md:col-span-2">
+                    <div className="col-span-2">
                       <label className="text-xs uppercase tracking-[0.15em] text-brick-muted">Description</label>
                       <textarea value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows={4} className="mt-2 w-full border border-brick-subtle bg-transparent p-4 text-sm text-brick-charcoal outline-none transition-luxe focus:border-brick-gold" />
                     </div>
 
-                    <div className="md:col-span-2">
+                    <div className="col-span-2">
                       <label className="text-xs uppercase tracking-[0.15em] text-brick-muted">Features (comma separated)</label>
                       <input type="text" value={formData.features} onChange={(e) => setFormData({...formData, features: e.target.value})} placeholder="Swimming Pool, Garden, 24/7 Security" className="mt-2 w-full border-b border-brick-subtle bg-transparent py-3 text-sm text-brick-charcoal outline-none transition-luxe focus:border-brick-gold" />
                     </div>

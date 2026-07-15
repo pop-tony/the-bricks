@@ -20,13 +20,13 @@ export default function AboutPage() {
           transition={{ duration: 1, ease }}
         >
           <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-6">Est. 2015</p>
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-brick-black leading-[0.95] max-w-4xl">
+          <h1 className="font-serif text-5xl text-7xl text-8xl text-brick-black leading-[0.95] max-w-4xl">
             Building trust in <span className="italic">Accra real estate</span>
           </h1>
         </motion.div>
 
         {/* Image + Story */}
-        <div className="mt-20 grid gap-16 lg:grid-cols-2 lg:gap-24 items-start">
+        <div className="mt-20 grid gap-16 gap-24 items-start grid-cols-2">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -46,7 +46,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.3, ease }}
-            className="lg:pt-12"
+            className="pt-12"
           >
             <div className="space-y-6 text-base leading-relaxed text-brick-muted">
               <p>
@@ -93,7 +93,7 @@ export default function AboutPage() {
           transition={{ duration: 1, delay: 0.2, ease }}
           className="mt-32 border-y border-brick-subtle py-16"
         >
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-0">
+          <div className="grid gap-12 gap-0 grid-cols-3">
             {stats.map((stat, i) => (
               <div key={i} className={`flex items-center gap-6 ${i !== 0 ? 'md:border-l md:border-brick-subtle md:pl-12' : ''}`}>
                 <stat.icon className="h-4 w-4 flex-shrink-0 text-brick-gold" />

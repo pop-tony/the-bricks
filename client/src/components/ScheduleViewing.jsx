@@ -134,7 +134,7 @@ export default function ScheduleViewing({ property, isOpen, onClose }) {
                         className="mt-8"
                       >
                         <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-4">Select Time</p>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid gap-3 grid-cols-2">
                           {timeSlots.map((time, i) => (
                             <motion.button
                               key={time}

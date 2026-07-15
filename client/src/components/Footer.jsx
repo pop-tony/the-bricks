@@ -35,14 +35,14 @@ export default function Footer() {
   return (
     <footer className="border-t border-brick-subtle bg-brick-white">
       <div className="mx-auto max-w-7xl px-8 py-24">
-        <div className="grid gap-20 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-20 grid-cols-5">
           {/* Brand */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease }}
-            className="lg:col-span-2"
+            className="col-span-2"
           >
             <Link to="/" className="font-serif text-4xl text-brick-black">
               The<span className="text-brick-gold">Bricks</span>
@@ -89,14 +89,14 @@ export default function Footer() {
                   whileInView={{ scaleY: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 * idx, ease }}
-                  className="absolute -left-4 top-0 hidden h-full w-px origin-top bg-brick-subtle lg:block"
+                  className="absolute -left-4 top-0 hidden h-full w-px origin-top bg-brick-subtle block"
                 />
 
-                <p className="text-brick-gold text- tracking-[0.2em] uppercase mb-6 lg:mb-8">
+                <p className="text-brick-gold text- tracking-[0.2em] uppercase mb-6 mb-8">
                   {title === 'areas'? 'Top Areas' : title}
                 </p>
 
-                <ul className="space-y-4 lg:space-y-5">
+                <ul className="space-y-4 space-y-5">
                   {items.map((link, i) => (
                     <motion.li
                       key={link.name}
@@ -107,7 +107,7 @@ export default function Footer() {
                     >
                       <Link
                         to={link.path}
-                        className="group inline-flex items-center gap-2 text- lg:text-sm text-brick-muted transition-luxe hover:text-brick-black"
+                        className="group inline-flex items-center gap-2 text- text-sm text-brick-muted transition-luxe hover:text-brick-black"
                       >
                         <span className="relative">
                           {link.name}
@@ -124,7 +124,7 @@ export default function Footer() {
         </div>
 
         {/* Contact Bar */}
-        <div className="mt-20 grid gap-8 border-y border-brick-subtle py-10 md:grid-cols-3">
+        <div className="mt-20 grid gap-8 border-y border-brick-subtle py-10 grid-cols-3">
           {[
             { icon: MapPin, text: 'East Legon, Accra, Ghana', href: 'https://maps.google.com/?q=East+Legon,+Accra' },
             { icon: Phone, text: '+233 XX XXX XXXX', href: 'tel:+233XXXXXXXXX' },
@@ -148,7 +148,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="flex flex-col items-center justify-between gap-6 pt-10 text-xs text-brick-muted md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-6 pt-10 text-xs text-brick-muted flex-row">
           <p>© {currentYear} The Bricks Properties. All rights reserved.</p>
           <div className="flex gap-8">
             <Link to="/privacy" className="hover:text-brick-charcoal transition-luxe">Privacy</Link>

@@ -16,7 +16,7 @@ export default function DevelopmentsPage() {
           transition={{ duration: 0.8, ease }}
         >
           <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-4">The Bricks Portfolio</p>
-          <h1 className="font-serif text-5xl md:text-6xl text-brick-black leading-[0.95]">
+          <h1 className="font-serif text-5xl text-6xl text-brick-black leading-[0.95]">
             New Developments
           </h1>
           <p className="mt-6 max-w-2xl text-base text-brick-muted">
@@ -28,7 +28,7 @@ export default function DevelopmentsPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease }}
-          className="mt-16 grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 grid gap-8 grid-cols-3"
         >
           {newBuilds.map((p, i) => (
             <motion.div

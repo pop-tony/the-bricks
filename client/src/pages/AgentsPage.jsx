@@ -19,13 +19,13 @@ export default function AgentsPage() {
           transition={{ duration: 1, ease }}
         >
           <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-6">Our Team</p>
-          <h1 className="font-serif text-5xl md:text-7xl text-brick-black">Meet Our Agents</h1>
+          <h1 className="font-serif text-5xl text-7xl text-brick-black">Meet Our Agents</h1>
           <p className="mt-6 text-base text-brick-muted max-w-2xl">
             Licensed professionals with deep expertise in Accra's premium neighborhoods.
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-8 grid-cols-3">
           {agents.map((agent, i) => (
             <motion.div
               key={agent.id}

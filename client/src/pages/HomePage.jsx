@@ -35,7 +35,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, ease }}
           >
             <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-4">Curated Selection</p>
-            <h2 className="font-serif text-4xl md:text-5xl text-brick-black">Featured Listings</h2>
+            <h2 className="font-serif text-4xl text-5xl text-brick-black">Featured Listings</h2>
             <p className="mt-4 text-brick-muted">Handpicked properties in Accra</p>
           </motion.div>
           <Link 
@@ -46,7 +46,7 @@ export default function HomePage() {
             <span className="h-px w-8 bg-brick-gold transition-luxe group-hover:w-12" />
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 grid-cols-3">
           {featured.map((p, i) => (
             <motion.div
               key={p.id}
@@ -72,7 +72,7 @@ export default function HomePage() {
             className="mb-16 text-center"
           >
             <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-4">Services</p>
-            <h2 className="font-serif text-4xl md:text-5xl text-brick-black">What We Do</h2>
+            <h2 className="font-serif text-4xl text-5xl text-brick-black">What We Do</h2>
           </motion.div>
           <div className="divide-y divide-brick-subtle">
             {services.map((s, i) => (

@@ -49,7 +49,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-8 flex">
           {links.map(link => (
             <NavLink
               key={link.name}
@@ -99,7 +99,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`p-2.5 lg:hidden transition-luxe ${
+            className={`p-2.5  transition-luxe ${
               scrolled ? 'text-brick-charcoal' : 'text-brick-white'
             }`}
           >
@@ -116,7 +116,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.5, ease }}
-            className="border-t border-brick-subtle bg-brick-white lg:hidden"
+            className="border-t border-brick-subtle bg-brick-white"
           >
             <div className="mx-auto max-w-7xl px-8 py-8">
               {links.map((link, i) => (

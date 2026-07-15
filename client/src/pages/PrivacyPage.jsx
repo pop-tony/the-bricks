@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
           transition={{ duration: 0.8, ease }}
         >
           <p className="text-brick-gold text-xs tracking-[0.2em] uppercase mb-4">Legal</p>
-          <h1 className="font-serif text-5xl md:text-6xl text-brick-black">Privacy Policy</h1>
+          <h1 className="font-serif text-5xl text-6xl text-brick-black">Privacy Policy</h1>
           <p className="mt-4 text-sm text-brick-muted">Last updated: June 4, 2026</p>
         </motion.div>
 

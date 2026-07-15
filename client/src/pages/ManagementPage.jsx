@@ -21,7 +21,7 @@ export default function ManagementPage() {
           className="mx-auto max-w-3xl text-center"
         >
           <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-4">For Owners</p>
-          <h1 className="font-serif text-5xl md:text-6xl text-brick-black leading-[0.95]">
+          <h1 className="font-serif text-5xl text-6xl text-brick-black leading-[0.95]">
             Property Management
           </h1>
           <p className="mt-6 text-lg text-brick-muted leading-relaxed">

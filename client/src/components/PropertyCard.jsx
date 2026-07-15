@@ -67,7 +67,7 @@ export default function PropertyCard({ property }) {
                 </span>
               )}
               {installment && (
-                <span className="hidden md:block text- font-medium uppercase tracking-[0.2em] text-brick-white/80">
+                <span className="hidden block text- font-medium uppercase tracking-[0.2em] text-brick-white/80">
                   Installment Available
                 </span>
               )}

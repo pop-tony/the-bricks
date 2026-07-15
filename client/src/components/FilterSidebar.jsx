@@ -16,14 +16,14 @@ export default function FilterSidebar({ filters, setFilters, isOpen, onClose }) 
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-40 bg-brick-black/60 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-brick-black/60 backdrop-blur-sm"
           />
         )}
       </AnimatePresence>
       
       <aside className={`fixed inset-y-0 right-0 z-50 w-full max-w-md bg-brick-white transition-transform duration-500 ease-luxe lg:sticky lg:top-0 lg:h-screen lg:w-80 lg:translate-x-0 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex h-full flex-col">
-          <div className="flex items-center justify-between border-b border-brick-subtle p-8 lg:hidden">
+          <div className="flex items-center justify-between border-b border-brick-subtle p-8">
             <h2 className="font-serif text-2xl text-brick-black">Filters</h2>
             <button onClick={onClose} className="text-brick-muted hover:text-brick-black"><X className="h-6 w-6" /></button>
           </div>

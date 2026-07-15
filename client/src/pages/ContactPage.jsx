@@ -13,10 +13,10 @@ export default function ContactPage() {
           transition={{ duration: 1, ease }}
         >
           <p className="text-brick-gold text-xs tracking-[0.3em] uppercase mb-6">Get in Touch</p>
-          <h1 className="font-serif text-5xl md:text-7xl text-brick-black">Contact Us</h1>
+          <h1 className="font-serif text-5xl text-7xl text-brick-black">Contact Us</h1>
         </motion.div>
         
-        <div className="mt-16 grid gap-16 lg:grid-cols-2 lg:gap-24">
+        <div className="mt-16 grid gap-16 gap-24 grid-cols-2">
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}

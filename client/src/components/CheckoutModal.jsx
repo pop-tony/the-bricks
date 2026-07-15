@@ -59,7 +59,7 @@ export default function CheckoutModal({ isOpen, onClose, items = [], onSuccess }
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-8 md:p-12">
+            <form onSubmit={handleSubmit} className="p-8 p-12">
               {/* Items Summary */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -96,7 +96,7 @@ export default function CheckoutModal({ isOpen, onClose, items = [], onSuccess }
                   <div className="h-px w-8 bg-brick-gold" />
                   <h3 className="font-serif text-xl text-brick-black">Shipping Details</h3>
                 </div>
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 grid-cols-2">
                   {['name','email','phone','city','address','region'].map((field, i) => (
                     <motion.input
                       key={field}

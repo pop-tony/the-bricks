@@ -167,7 +167,7 @@ export default function HeroSearch() {
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             style={{ transform: 'translateZ(20px)' }}
           >
-            <div className="grid gap-2 md:grid-cols-[140px_1fr_200px_160px]">
+            <div className="grid gap-2 grid-cols-[140px_1fr_200px_160px]">
               <select value={status} onChange={(e) => setStatus(e.target.value)} className={`px-4 py-4 text-sm font-medium outline-none transition-all duration-700 ${isDark? 'bg-brick-white/10 text-brick-white' : 'bg-brick-black/5 text-brick-black'}`}>
                 <option className={isDark? 'bg-brick-charcoal' : 'bg-white'}>Buy</option>
                 <option className={isDark? 'bg-brick-charcoal' : 'bg-white'}>Rent</option>
