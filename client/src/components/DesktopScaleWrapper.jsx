@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState, useRef } from 'react';
 
 // ADJUST THESE TO MAKE MOBILE LARGER/SMALLER
-const DESIGN_WIDTH = 1024; // was 1280 - smaller = larger on mobile
+const DESIGN_WIDTH = 1280; // was 1280 - smaller = larger on mobile
 const SCALE_BOOST = 1.35; // 1.35 = 35% larger than strict fit
 const MIN_SCALE = 0.42; // never smaller than 42% - prevents tiny text
 const MAX_SCALE = 1;
