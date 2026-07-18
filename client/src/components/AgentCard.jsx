@@ -1,89 +1,17 @@
-import { Phone, MessageCircle } from 'lucide-react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { loop3DRotate, float3D } from '../lib/motion';
-import { useRef } from 'react';
 
-export default function AgentCard({ agent }) {
-  const { name, photo, phone, listings, sold } = agent;
-  const whatsappMsg = `Hi ${name}, I'm interested in a property from the Bricks`;
-  
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-  
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7.5deg", "-7.5deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7.5deg", "7.5deg"]);
-  
-  const handleMouseMove = (e) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  };
-  
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
+import { Phone, MessageCircle, BadgeCheck } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+export default function AgentCard({ agent }){
+  const { isDark } = useTheme();
+  const { name='Kwame Mensah', photo='', phone='233598052702', listings=47, sold=32, role='Lakeside Specialist' } = agent||{};
+  const msg=`Hi ${name}, I'm interested in a property from The Bricks - Lakeside Estate`;
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      animate={loop3DRotate({ duration: 22 })}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="perspective-1000"
-    >
-      <motion.div 
-        style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }}
-        className="bg-brick-white border border-brick-subtle p-8 text-center shadow-luxe"
-        animate={float3D({ duration: 7 })}
-      >
-        <div className="mx-auto h-28 w-28 overflow-hidden border-2 border-brick-gold">
-          <motion.img 
-            whileHover={{ scale: 1.08 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            src={photo} 
-            alt={name} 
-            className="h-full w-full object-cover" 
-          />
-        </div>
-        
-        <h3 className="font-serif mt-6 text-2xl text-brick-charcoal">{name}</h3>
-        <div className="mx-auto mt-2 h-px w-12 bg-brick-gold" />
-        <p className="mt-4 text-sm text-brick-muted tracking-wide">
-          {sold} Sold • {listings} Active
-        </p>
-        
-        <div className="mt-8 flex gap-3" style={{ transform: "translateZ(20px)" }}>
-          <a 
-            href={`https://wa.me/${phone}?text=${encodeURIComponent(whatsappMsg)}`}
-            className="flex flex-1 items-center justify-center gap-2 border border-brick-charcoal bg-brick-charcoal py-3 text-xs font-medium uppercase tracking-[0.15em] text-brick-white transition-luxe hover:bg-brick-gold hover:border-brick-gold hover:text-brick-black"
-          >
-            <MessageCircle className="h-4 w-4" /> Message
-          </a>
-          <a 
-            href={`tel:${phone}`}
-            className="flex items-center justify-center border border-brick-subtle p-3 text-brick-charcoal transition-luxe hover:border-brick-gold hover:text-brick-gold"
-          >
-            <Phone className="h-4 w-4" />
-          </a>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
+    <div className={`rounded-2xl p-6 border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${isDark?'bg-[#112A4A] border-white/10':'bg-white border-black/5'}`}>
+      <div className="flex items-center gap-4">
+        <div className="relative">{photo?<img src={photo} alt={name} className="h-14 w-14 rounded-full object-cover border-2 border-white/10"/>:<div className="h-14 w-14 rounded-full bg-gradient-to-br from-[#0A2342] to-[#FF6A00] flex items-center justify-center text-white font-black text-xl">{name[0]}</div>}<div className="absolute -bottom-1 -right-1 h-5 w-5 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center"><BadgeCheck className="h-3 w-3 text-white"/></div></div>
+        <div><p className={`font-black text-[15px] ${isDark?'text-white':'text-[#0A2342]'}`}>{name}</p><p className={`text-[11px] uppercase tracking-widest font-bold ${isDark?'text-white/40':'text-black/40'}`}>{role}</p><p className={`text-[11px] mt-1 ${isDark?'text-white/50':'text-black/40'}`}>{listings} Active • {sold} Sold</p></div>
+      </div>
+      <div className="mt-6 grid grid-cols-[1fr_auto] gap-2.5"><a href={`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`} target="_blank" className="flex items-center justify-center gap-2 bg-[#0A2342] py-3.5 rounded-xl text-xs font-black uppercase tracking-widest text-white hover:bg-[#FF6A00] transition-colors"><MessageCircle className="h-4 w-4"/>Message</a><a href={`tel:+${phone}`} className={`flex items-center justify-center w-12 border rounded-xl transition-colors ${isDark?'bg-white/10 border-white/10 text-white hover:bg-white/20':'bg-white border-black/10 text-[#0A2342] hover:bg-black/5'}`}><Phone className="h-4 w-4"/></a></div>
+    </div>
+  )
 }

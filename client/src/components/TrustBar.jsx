@@ -1,35 +1,14 @@
-import { ShieldCheck, Home, Award } from 'lucide-react';
-import { motion } from 'framer-motion';
 
-const ease = [0.22, 1, 0.36, 1];
-
-export default function TrustBar() {
-  const stats = [
-    { icon: ShieldCheck, label: 'GREDA Licensed', value: 'Since 2015' },
-    { icon: Home, label: 'Properties Listed', value: '200+' },
-    { icon: Award, label: 'Years in Accra', value: '10+' },
-  ];
-
+import { ShieldCheck, Home, Star } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+export default function TrustBar(){
+  const { isDark } = useTheme();
+  const stats=[{icon:ShieldCheck,k:'GREDA',v:'Licensed',sub:'Since 2015'},{icon:Home,k:'200+',v:'Properties',sub:'Sold in Accra'},{icon:Star,k:'Lakeside',v:'Experts',sub:'Estate Specialists'}];
   return (
-    <section className="border-y border-brick-subtle bg-brick-white py-16">
-      <div className="mx-auto grid max-w-7xl gap-12 px-8 gap-0 grid-cols-3">
-        {stats.map((stat, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: i * 0.1, ease }}
-            className={`flex items-center gap-6 ${i!== 0? 'md:border-l md:border-brick-subtle md:pl-12' : ''}`}
-          >
-            <stat.icon className="h-4 w-4 flex-shrink-0 text-brick-gold" />
-            <div>
-              <p className="font-serif text-3xl text-brick-black">{stat.value}</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.15em] text-brick-muted">{stat.label}</p>
-            </div>
-          </motion.div>
-        ))}
+    <section className={`border-y transition-colors duration-500 ${isDark?'bg-[#081A33] border-white/10':'bg-white border-black/5'}`}>
+      <div className="mx-auto grid max-w-7xl grid-cols-1 md:grid-cols-3 px-4 md:px-8">
+        {stats.map((s,i)=>{ const Icon=s.icon; return <div key={i} className={`flex items-center gap-4 py-7 ${i!==0?'md:border-l md:pl-10 border-t md:border-t-0':''} ${isDark?'md:border-white/10 border-white/10':'md:border-black/5 border-black/5'}`}><div className="h-11 w-11 bg-[#FF6A00] rounded-xl flex items-center justify-center text-white shadow"><Icon className="h-5 w-5"/></div><div><p className={`font-black text-xl ${isDark?'text-white':'text-[#0A2342]'}`}>{s.k} <span className="font-normal opacity-70">{s.v}</span></p><p className={`text-[11px] uppercase tracking-widest font-bold ${isDark?'text-white/40':'text-black/40'}`}>{s.sub}</p></div></div>})}
       </div>
     </section>
-  );
+  )
 }

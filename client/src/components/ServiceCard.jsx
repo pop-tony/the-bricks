@@ -1,32 +1,15 @@
+
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-
-const ease = [0.22, 1, 0.36, 1];
-
-export default function ServiceCard({ title, desc, icon: Icon, link }) {
+import { useTheme } from '../context/ThemeContext';
+export default function ServiceCard({ title, desc, icon: Icon, link, k }){
+  const { isDark } = useTheme();
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease }}
-    >
-      <Link
-        to={link}
-        className="group block border-b border-brick-subtle py-10 transition-luxe hover:border-brick-gold"
-      >
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <Icon className="h-6 w-6 text-brick-gold mb-6" />
-            <h3 className="font-serif text-2xl text-brick-charcoal transition-luxe group-hover:text-brick-gold">
-              {title}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-brick-muted max-w-md">{desc}</p>
-          </div>
-          <ArrowUpRight className="h-5 w-5 text-brick-gold opacity-0 -translate-x-2 transition-luxe group-hover:opacity-100 group-hover:translate-x-0" />
-        </div>
-      </Link>
-    </motion.div>
-  );
+    <Link to={link||'/properties'} className={`group block rounded-[20px] border p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${isDark?'bg-white/5 border-white/10 hover:bg-white/10':'bg-[#F8F9FB] border-black/5 hover:bg-[#0A2342]'}`}>
+      <div className="flex justify-between items-start"><div className="h-11 w-11 rounded-xl bg-gradient-to-br from-[#FF6A00] to-[#FF9A00] flex items-center justify-center text-white shadow">{Icon?<Icon className="h-5 w-5"/>:<span className="font-black">{k||'•'}</span>}</div><ArrowUpRight className={`h-5 w-5 transition-all ${isDark?'text-white/30 group-hover:text-white/60':'text-black/20 group-hover:text-white/40'} group-hover:translate-x-0.5 group-hover:-translate-y-0.5`} /></div>
+      <h3 className={`mt-6 font-black text-[15px] leading-tight transition-colors ${isDark?'text-white':'text-[#0A2342] group-hover:text-white'}`}>{title}</h3>
+      <p className={`mt-2.5 text-[13px] leading-6 transition-colors ${isDark?'text-white/60':'text-black/50 group-hover:text-white/60'}`}>{desc}</p>
+      <div className="mt-5 flex items-center gap-1 text-[11px] font-black uppercase tracking-widest text-[#FF6A00]">Learn more <span className="group-hover:translate-x-1 transition-transform">→</span></div>
+    </Link>
+  )
 }

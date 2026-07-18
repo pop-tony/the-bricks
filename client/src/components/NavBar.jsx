@@ -1,23 +1,22 @@
 import { Link, NavLink } from 'react-router-dom';
-import { Moon, Sun, Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Sun, Moon, Phone } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
-
-const ease = [0.22, 1, 0.36, 1];
+import logo from '../assets/logo.webp';
 
 export default function Navbar() {
-  const { isDark, toggleTheme } = useTheme();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const links = [
+    { name: 'Home', path: '/' },
     { name: 'Properties', path: '/properties' },
     { name: 'Developments', path: '/developments' },
     { name: 'Sell', path: '/sell' },
@@ -27,132 +26,56 @@ export default function Navbar() {
   ];
 
   return (
-    <motion.header 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease }}
-      className={`fixed top-0 z-50 w-full transition-all duration-500 ease-luxe ${
-        scrolled 
-          ? 'border-b border-brick-subtle bg-brick-white/80 backdrop-blur-xl' 
-          : 'bg-transparent'
-      }`}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-8 py-6">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <motion.div animate={{ rotateY: [0, 360] }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }} className="flex h-10 w-10 items-center justify-center bg-brick-gold transition-luxe group-hover:bg-brick-charcoal">
-            <span className="font-serif text-xl text-brick-black group-hover:text-brick-gold transition-luxe">B</span>
-          </motion.div>
-          <span className={`font-serif text-2xl transition-luxe ${scrolled ? 'text-brick-black' : 'text-brick-white'}`}>
-            The<span className="text-brick-gold">Bricks</span>
-          </span>
+    <header className={`p-5 fixed top-0 z-50 w-full border-b transition-all duration-500 ${
+      scrolled? 'backdrop-blur-xl shadow-lg' : ''
+    } ${isDark
+     ? 'bg-[#0A2342]/95 border-white/10'
+      : 'bg-white/95 border-black/5'}`}>
+
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-8 h-">
+        <Link to="/" className="flex items-center gap-3">
+          <div className={`h-10 w-10 rounded-xl p-1.5 flex items-center justify-center shadow transition-colors duration-500 ${isDark? 'bg-white' : 'bg-[#0A2342]'}`}>
+            <img src={logo} alt="Bricks" className="h-full w-full object-contain" />
+          </div>
+          <div className="leading-[0.9]">
+            <p className={`font-black text- tracking-wide transition-colors ${isDark? 'text-white' : 'text-[#0A2342]'}`}>THE BRICKS</p>
+            <p className={`text- tracking-[0.22em] font-bold uppercase transition-colors ${isDark? 'text-white/60' : 'text-black/40'}`}>Properties</p>
+          </div>
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden items-center gap-8 flex">
-          {links.map(link => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              className={({ isActive }) =>
-                `relative text-sm font-medium tracking-wide transition-luxe ${
-                  isActive
-                    ? 'text-brick-gold'
-                    : scrolled 
-                      ? 'text-brick-muted hover:text-brick-charcoal' 
-                      : 'text-brick-white/80 hover:text-brick-white'
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  {link.name}
-                  <span className={`absolute -bottom-1 left-0 h-px w-full origin-center scale-x-0 bg-brick-gold transition-luxe ${isActive ? 'scale-x-100' : 'group-hover:scale-x-100'}`} />
-                </>
-              )}
+        <div className="hidden lg:flex items-center gap-7">
+          {links.map(l => (
+            <NavLink key={l.name} to={l.path} className={({isActive}) =>
+              `text- font-medium transition-colors ${isActive? 'text-[#FF6A00] font-black' : isDark? 'text-white/70 hover:text-white' : 'text-black/60 hover:text-[#0A2342]'}`}>
+              {l.name}
             </NavLink>
           ))}
         </div>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-4">
-          <a
-            href="tel:+233XXXXXXXXX"
-            className={`hidden items-center gap-3 border px-5 py-3 text-xs font-medium uppercase tracking-[0.15em] transition-luxe md:flex ${
-              scrolled 
-                ? 'border-brick-charcoal text-brick-charcoal hover:bg-brick-charcoal hover:text-brick-white' 
-                : 'border-brick-white/20 text-brick-white hover:bg-brick-white hover:text-brick-black'
-            }`}
-          >
-            <Phone className="h-3.5 w-3.5" />
-            Call Us
-          </a>
-
-          <button
-            onClick={toggleTheme}
-            className={`p-2.5 transition-luxe ${
-              scrolled ? 'text-brick-muted hover:text-brick-charcoal' : 'text-brick-white/70 hover:text-brick-white'
-            }`}
-          >
-            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        <div className="flex items-center gap-2">
+          <button onClick={toggleTheme} className={`h-9 w-9 rounded-xl flex items-center justify-center transition-all duration-300 ${isDark? 'bg-white/10 text-white hover:bg-white/20' : 'bg-black/5 text-[#0A2342] hover:bg-black/10'}`}>
+            {isDark? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
-
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className={`p-2.5  transition-luxe ${
-              scrolled ? 'text-brick-charcoal' : 'text-brick-white'
-            }`}
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          <a href="tel:+233598052702" className="hidden md:flex items-center gap-2 bg-[#FF6A00] px-5 py-3 text-xs font-black uppercase tracking-widest text-white hover:bg-[#FF8A1F] rounded-xl shadow transition-colors">
+            <Phone className="h-3.5 w-3.5" /> Call
+          </a>
+          <button onClick={() => setOpen(!open)} className={`lg:hidden p-2.5 rounded-xl transition-colors ${isDark? 'text-white hover:bg-white/10' : 'text-[#0A2342] hover:bg-black/5'}`}>
+            {open? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.5, ease }}
-            className="border-t border-brick-subtle bg-brick-white"
-          >
-            <div className="mx-auto max-w-7xl px-8 py-8">
-              {links.map((link, i) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.5, ease }}
-                >
-                  <NavLink
-                    to={link.path}
-                    onClick={() => setMobileOpen(false)}
-                    className={({ isActive }) =>
-                      `block border-b border-brick-subtle py-4 font-serif text-lg transition-luxe ${
-                        isActive ? 'text-brick-gold' : 'text-brick-charcoal hover:text-brick-gold'
-                      }`
-                    }
-                  >
-                    {link.name}
-                  </NavLink>
-                </motion.div>
-              ))}
-              <motion.a
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5, ease }}
-                href="tel:+233XXXXXXXXX"
-                className="mt-6 flex items-center justify-center gap-3 bg-brick-charcoal py-4 text-sm font-medium uppercase tracking-[0.15em] text-brick-white"
-              >
-                <Phone className="h-4 w-4" />
-                Call The Bricks
-              </motion.a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+      {open && (
+        <div className={`lg:hidden border-t px-4 py-6 transition-colors ${isDark? 'bg-[#0A2342] border-white/10' : 'bg-white border-black/5'}`}>
+          {links.map(l => (
+            <NavLink key={l.name} to={l.path} onClick={()=>setOpen(false)} className={({isActive})=>`block py-4 border-b text-sm transition-colors ${isDark? 'border-white/10' : 'border-black/5'} ${isActive?'text-[#FF6A00] font-black': isDark?'text-white/80':'text-black/60'}`}>{l.name}</NavLink>
+          ))}
+          <div className="mt-4 flex gap-3">
+            <button onClick={toggleTheme} className={`flex-1 py-3 rounded-xl text-xs font-black uppercase flex items-center justify-center gap-2 transition-colors ${isDark? 'bg-white/10 text-white' : 'bg-black/5 text-[#0A2342]'}`}>{isDark? <><Sun className="h-4 w-4"/> White Mode</> : <><Moon className="h-4 w-4"/> Navy Mode</>}</button>
+            <a href="tel:+233598052702" className="flex-1 bg-[#FF6A00] py-3 rounded-xl text-xs font-black uppercase text-white text-center">Call</a>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }
