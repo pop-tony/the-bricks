@@ -10,7 +10,7 @@ export default function PropertyCard({ property }){
   const { id, title, price, location, beds, baths, size, images, status, verified } = property;
   return (
     <div className={`group rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-20px_rgba(0,0,0,0.3)] ${isDark ? 'bg-[#112A4A] border-white/10 hover:border-white/20' : 'bg-white border-black/5 hover:border-black/10'}`}>
-      <Link to={`/properties/${id}`}>
+      <Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to={`/properties/${id}`}>
         <div className="relative aspect-[4/3] overflow-hidden bg-[#0A2342]">
           {images?.[0] ? <img src={images[0]} alt={title} className="h-full w-full object-cover group-hover:scale-[1.05] transition-transform duration-700" /> : <div className="h-full w-full flex items-center justify-center text-white/20">No Image</div>}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />

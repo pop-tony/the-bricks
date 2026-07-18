@@ -99,7 +99,7 @@ export default function Footer(){
                 <ul className="mt-5 space-y-3.5">
                   {items.map(l=>(
                     <li key={l.name}>
-                      <Link to={l.path} className={`group inline-flex items-center gap-1.5 text-[13.5px] transition-colors ${isDark?'text-white/60 hover:text-white':'text-black/60 hover:text-[#0A2342]'}`}>
+                      <Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to={l.path} className={`group inline-flex items-center gap-1.5 text-[13.5px] transition-colors ${isDark?'text-white/60 hover:text-white':'text-black/60 hover:text-[#0A2342]'}`}>
                         {l.name}
                         <ArrowUpRight className="h-3 w-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#FF6A00]"/>
                       </Link>
@@ -115,9 +115,6 @@ export default function Footer(){
         <div className={`mt-12 flex flex-col md:flex-row items-center justify-between gap-6 border-t pt-8 transition-colors ${isDark?'border-white/10':'border-black/5'}`}>
           <div className="flex flex-wrap items-center gap-4">
             <p className={`text- transition-colors ${isDark?'text-white/30':'text-black/30'}`}>© {year} The Bricks Properties • Lakeside Estate • GREDA Licensed</p>
-            <div className={`hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full border text- font-bold uppercase tracking-widest transition-colors ${isDark?'bg-white/5 border-white/10 text-white/50':'bg-[#F8F9FB] border-black/5 text-black/40'}`}>
-              <div className="h-1.5 w-1.5 bg-emerald-500 rounded-full animate-pulse"/> Available 7 days
-            </div>
           </div>
 
           <div className="flex items-center gap-6">
@@ -126,8 +123,8 @@ export default function Footer(){
               <a href="https://wa.me/233598052702" target="_blank" className="h-9 w-9 rounded-xl bg-[#FF6A00] flex items-center justify-center text-white hover:bg-[#FF8A1F] transition-colors shadow"><MessageCircle className="h-4 w-4"/></a>
             </div>
             <div className={`flex gap-5 text- transition-colors ${isDark?'text-white/30':'text-black/30'}`}>
-              <Link to="/privacy" className="hover:underline hover:text-[#FF6A00]">Privacy</Link>
-              <Link to="/terms" className="hover:underline hover:text-[#FF6A00]">Terms</Link>
+              <Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to="/privacy" className="hover:underline hover:text-[#FF6A00]">Privacy</Link>
+              <Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to="/terms" className="hover:underline hover:text-[#FF6A00]">Terms</Link>
             </div>
           </div>
         </div>

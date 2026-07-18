@@ -33,7 +33,7 @@ export default function Navbar() {
       : 'bg-white/95 border-black/5'}`}>
 
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-8 h-">
-        <Link to="/" className="flex items-center gap-3">
+        <Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to="/" className="flex items-center gap-3">
           <div className={`h-10 w-10 rounded-xl p-1.5 flex items-center justify-center shadow transition-colors duration-500 ${isDark? 'bg-white' : 'bg-[#0A2342]'}`}>
             <img src={logo} alt="Bricks" className="h-full w-full object-contain" />
           </div>
@@ -45,7 +45,7 @@ export default function Navbar() {
 
         <div className="hidden lg:flex items-center gap-7">
           {links.map(l => (
-            <NavLink key={l.name} to={l.path} className={({isActive}) =>
+            <NavLink onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} key={l.name} to={l.path} className={({isActive}) =>
               `text- font-medium transition-colors ${isActive? 'text-[#FF6A00] font-black' : isDark? 'text-white/70 hover:text-white' : 'text-black/60 hover:text-[#0A2342]'}`}>
               {l.name}
             </NavLink>
