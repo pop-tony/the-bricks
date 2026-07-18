@@ -5,16 +5,13 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { ThemeProvider } from './context/ThemeContext'
-import DesktopScaleWrapper from './components/DesktopScaleWrapper';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
     <ThemeProvider>
       <Toaster richColors position="top-center" />
-      <DesktopScaleWrapper>
         <App />
-      </DesktopScaleWrapper>
     </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,

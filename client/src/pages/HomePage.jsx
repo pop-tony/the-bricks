@@ -27,7 +27,7 @@ export default function HomePage(){
           <div><p className="text-[#FF6A00] text-[11px] tracking-[0.3em] uppercase font-black mb-3">Curated Selection</p><h2 className={`font-black text-3xl md:text-5xl leading-[0.9] ${isDark?'text-white':'text-[#0A2342]'}`}>Featured Listings</h2><p className={`mt-3 text-sm ${isDark?'text-white/50':'text-black/50'}`}>Handpicked in Lakeside Estate & Accra</p></div>
           <Link to="/properties" className={`group hidden md:flex items-center gap-2 text-xs font-black uppercase tracking-widest ${isDark?'text-white/70 hover:text-white':'text-[#0A2342] hover:text-[#FF6A00]'}`}>View All <span className="h-px w-8 bg-[#FF6A00] group-hover:w-12 transition-all"/></Link>
         </div>
-        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
           {featured.map(p=><PropertyCard key={p.id} property={p} />)}
         </div>
       </section>

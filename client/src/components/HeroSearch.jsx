@@ -65,23 +65,23 @@ export default function HeroSearch(){
             Land Acquisition • Houses for Sale • Apartments for Rent. Verified titles, flexible payment plans.
           </p>
 
-          <div className={`mt-8 p-2 md:p-2.5 rounded-2xl max-w- border transition-all duration-500 ${isDark?'bg-[#112A4A]/80 backdrop-blur-xl border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)]':'bg-white/90 backdrop-blur-xl border-black/5 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.15)]'}`}>
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] gap-2">
-              <select value={status} onChange={e=>setStatus(e.target.value)} className={`h-12 md:h-14 w-full rounded-xl border px-4 text-sm font-medium outline-none focus:border-[#FF6A00] transition-colors ${isDark?'bg-white/5 border-white/10 text-white':'bg-[#F8F9FB] border-black/5 text-[#0A2342]'}`}>
+          <div className={`mt-8 p-1.5 md:p-2.5 rounded-xl md:rounded-2xl max-w- border transition-all duration-500 ${isDark?'bg-[#112A4A]/80 backdrop-blur-xl border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)]':'bg-white/90 backdrop-blur-xl border-black/5 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.15)]'}`}>
+            <div className="flex flex-row gap-1 md:gap-2">
+              <select value={status} onChange={e=>setStatus(e.target.value)} className={`flex-1 min-w-0 h-10 md:h-14 rounded-lg md:rounded-xl border px-1.5 md:px-4 text- md:text-sm font-medium outline-none focus:border-[#FF6A00] transition-colors ${isDark?'bg-white/5 border-white/10 text-white':'bg-[#F8F9FB] border-black/5 text-[#0A2342]'}`}>
                 <option>Buy</option><option>Rent</option><option>New Builds</option>
               </select>
 
-              <div className="relative">
-                <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#FF6A00]"/>
-                <input value={location} onChange={e=>setLocation(e.target.value)} placeholder="Lakeside Estate..." className={`h-12 md:h-14 w-full rounded-xl border pl-10 pr-4 text-sm outline-none focus:border-[#FF6A00] transition-colors ${isDark?'bg-white/5 border-white/10 text-white placeholder:text-white/40':'bg-[#F8F9FB] border-black/5 text-[#0A2342] placeholder:text-black/40'}`} />
+              <div className="flex-[1.4] min-w-0 relative">
+                <MapPin className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 h-3 w-3 md:h-4 md:w-4 text-[#FF6A00]"/>
+                <input value={location} onChange={e=>setLocation(e.target.value)} placeholder="Lakeside..." className={`h-10 md:h-14 w-full rounded-lg md:rounded-xl border pl-6 md:pl-10 pr-1.5 md:pr-4 text- md:text-sm outline-none focus:border-[#FF6A00] transition-colors ${isDark?'bg-white/5 border-white/10 text-white placeholder:text-white/40':'bg-[#F8F9FB] border-black/5 text-[#0A2342] placeholder:text-black/40'}`} />
               </div>
 
-              <select value={type} onChange={e=>setType(e.target.value)} className={`h-12 md:h-14 w-full rounded-xl border px-4 text-sm outline-none focus:border-[#FF6A00] transition-colors ${isDark?'bg-white/5 border-white/10 text-white':'bg-[#F8F9FB] border-black/5 text-[#0A2342]'}`}>
-                <option value="">All Types</option><option>Apartment</option><option>House</option><option>Land</option>
+              <select value={type} onChange={e=>setType(e.target.value)} className={`flex-1 min-w-0 h-10 md:h-14 rounded-lg md:rounded-xl border px-1.5 md:px-4 text- md:text-sm outline-none focus:border-[#FF6A00] transition-colors ${isDark?'bg-white/5 border-white/10 text-white':'bg-[#F8F9FB] border-black/5 text-[#0A2342]'}`}>
+                <option value="">Type</option><option>Apartment</option><option>House</option><option>Land</option>
               </select>
 
-              <button onClick={handleSearch} className="h-12 md:h-14 flex items-center justify-center gap-2 bg-[#FF6A00] px-8 rounded-xl text-xs font-black uppercase tracking-widest text-white hover:bg-[#0A2342] transition-colors">
-                <Search className="h-4 w-4"/>Search
+              <button onClick={handleSearch} className="h-10 md:h-14 flex items-center justify-center gap-1 md:gap-2 bg-[#FF6A00] px-3 md:px-8 rounded-lg md:rounded-xl text- md:text-xs font-black uppercase tracking-widest text-white hover:bg-[#0A2342] transition-colors shrink-0">
+                <Search className="h-3 w-3 md:h-4 md:w-4"/> <span className="hidden xs:inline md:inline">Search</span>
               </button>
             </div>
           </div>
